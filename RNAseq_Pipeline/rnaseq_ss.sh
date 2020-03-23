@@ -60,7 +60,7 @@ else
 		STAR --genomeDir $REF --readFilesIn  $HOME/$1/$1_R1.fastq.gz  --readFilesCommand zcat --twopassMode Basic --outSAMtype BAM SortedByCoordinate --chimSegmentMin 12  --chimJunctionOverhangMin 12  --alignIntronMax 100000  --chimSegmentReadGapMax 3 --outFileNamePrefix $1 --runThreadN $SLURM_CPUS_PER_TASK --outFilterMismatchNmax 2  --outSAMunmapped Within --quantMode TranscriptomeSAM
 	fi
 
-	if [ -f "$SAMPLE/$1Log.final.out" ]
+	if [ -f "$1Log.final.out" ]
 	then
 		echo "mapping completed"
 	else
@@ -135,7 +135,7 @@ else
 	scale_factor=`echo "scale=5; 1000000/$total_mapped_reads" | bc `
 	echo "scale TDF factor: $scale_factor"
 
-	/data/khanlab/projects/ChIP_seq/scripts/scaleTDF.pl -i $HOME/$1/$1.tdf -o $HOME/$1/$1.RPM.tdf -f $scale_factor
+	/data/khanlab/projects/ChIP_seq/scripts/scaleTDF.pl -i $1.tdf -o $1.RPM.tdf -f $scale_factor
 	echo "RPM scaled TDF complete"
 fi
 
